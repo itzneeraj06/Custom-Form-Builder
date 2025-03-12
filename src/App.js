@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FormBuilder from './components/FormBuilder';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import DynamicForm from './components/DynamicJsx';
 
-function App() {
+const App = () => {
+  const [formData, setFormData] = useState([])
+  const style = { color: '#6A9C89', textAlign: 'center', margin: 0, padding: '20px' }
+  const addBg = { backgroundColor: '#2a2a2a', minHeight: '100vh'}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={addBg}>
+      <h1 style={style}>ThirdEx Survey Form</h1>
+      <hr />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<FormBuilder setFormData={setFormData} />}></Route>
+          <Route path='/preview' element={<DynamicForm formData={formData} />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

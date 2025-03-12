@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-container {
+            margin-top: 20px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container form-container">
+        <h2>Dynamic Form</h2>
+        <form id="dynamicForm">
+            <!-- Dynamic Fields will be injected here -->
+        </form>
+    </div>
+
+    <script>
+        const formData = [
+            { type: 'textarea', required: false, label: 'Text Area', className: 'form-control', name: 'textarea-1741668537676-0' },
+            { type: 'select', required: false, label: 'Select', className: 'form-control', name: 'select-1741668557526-0' },
+            { type: 'radio-group', required: false, label: 'Radio Group', inline: false, name: 'radio-group-1741668569876-0' },
+            { type: 'paragraph', subtype: 'p', label: 'Paragraph', access: false },
+            { type: 'number', required: false, label: 'Number', className: 'form-control', name: 'number-1741668572729-0' },
+            { type: 'hidden', name: 'hidden-1741668583845-0', access: false },
+            { type: 'header', subtype: 'h1', label: 'Header', access: false },
+            { type: 'file', required: false, label: 'File Upload', className: 'form-control', name: 'file-1741668587932-0' },
+            { type: 'date', required: false, label: 'Date Field', className: 'form-control', name: 'date-1741668590752-0' },
+            { type: 'checkbox-group', required: false, label: 'Checkbox Group', toggle: false, inline: false },
+            { type: 'button', label: 'Button', subtype: 'button', className: 'btn-default btn', name: 'button-1741668597347-0' },
+            { type: 'autocomplete', required: false, label: 'Autocomplete', className: 'form-control', name: 'autocomplete-1741668599245-0' }
+        ];
+        function generateForm(fields) {
+            const formElement = document.getElementById('dynamicForm');
+
+            fields.forEach(field => {
+                let fieldHTML = '';
+
+                switch (field.type) {
+                    case 'textarea':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <textarea class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}></textarea>
+              </div>
+            `;
+                        break;
+
+                    case 'select':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <select class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}>
+                  <option value="">Please select</option>
+                  <!-- Add options dynamically as needed -->
+                </select>
+              </div>
+            `;
+                        break;
+
+                    case 'radio-group':
+                        fieldHTML = `
+              <div class="form-group">
+                <label>${field.label}</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="${field.name}" id="${field.name}-option1" value="option1">
+                  <label class="form-check-label" for="${field.name}-option1">Option 1</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="${field.name}" id="${field.name}-option2" value="option2">
+                  <label class="form-check-label" for="${field.name}-option2">Option 2</label>
+                </div>
+              </div>
+            `;
+                        break;
+
+                    case 'number':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <input type="number" class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}>
+              </div>
+            `;
+                        break;
+
+                    case 'file':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <input type="file" class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}>
+              </div>
+            `;
+                        break;
+
+                    case 'date':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <input type="date" class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}>
+              </div>
+            `;
+                        break;
+
+                    case 'checkbox-group':
+                        fieldHTML = `
+              <div class="form-group">
+                <label>${field.label}</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="${field.name}" value="option1">
+                  <label class="form-check-label">Option 1</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="${field.name}" value="option2">
+                  <label class="form-check-label">Option 2</label>
+                </div>
+              </div>
+            `;
+                        break;
+
+                    case 'button':
+                        fieldHTML = `
+              <div class="form-group">
+                <button type="button" class="${field.className}" name="${field.name}">${field.label}</button>
+              </div>
+            `;
+                        break;
+
+                    case 'autocomplete':
+                        fieldHTML = `
+              <div class="form-group">
+                <label for="${field.name}">${field.label}</label>
+                <input type="text" class="${field.className}" name="${field.name}" ${field.required ? 'required' : ''}>
+              </div>
+            `;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                formElement.innerHTML += fieldHTML;
+            });
+        }
+        generateForm(formData);
+    </script>
+
+</body>
+
+</html>
