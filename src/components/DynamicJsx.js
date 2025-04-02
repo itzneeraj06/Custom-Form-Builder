@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 
 const DynamicForm = ({ formData }) => {
-    console.log(formData);
     const navigate = useNavigate()
 
     const initialValues = {}

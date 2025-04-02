@@ -61,7 +61,7 @@ const FormBuilder = ({ setFormData }) => {
   const getFormData = () => {
     const formData = window.$('#fb-editor').formBuilder('getData');
     setFormData(formData)
-    navigate('/preview')
+    navigate('/templateone')
   }
 
   return (
