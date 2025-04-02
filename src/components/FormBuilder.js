@@ -24,7 +24,7 @@ const FormBuilder = ({ setFormData }) => {
                 disabledActionButtons: ['save', 'data'],
                 disabledAttrs: [
                   'access',
-                  'className',
+                  // 'className',
                   'inline',
                   'min',
                   'max',
