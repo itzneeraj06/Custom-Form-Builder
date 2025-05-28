@@ -1,7 +1,9 @@
+import { Button, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FormBuilder = ({ setFormData }) => {
+const FormBuilder = ({ setFormData, FormData }) => {
+
   const navigate = useNavigate()
 
   const loadScripts = () => {
@@ -19,7 +21,7 @@ const FormBuilder = ({ setFormData }) => {
           scriptFormRender.onload = () => {
             if (!document.getElementById('fb-editor').classList.contains('fb-builder-initialized')) {
               const options = {
-                disableFields: ['autocomplete', 'hidden'],
+                disableFields: ['autocomplete', 'hidden', 'header', 'button'],
                 controlPosition: 'left',
                 disabledActionButtons: ['save', 'data'],
                 disabledAttrs: [
@@ -40,6 +42,12 @@ const FormBuilder = ({ setFormData }) => {
                   'subtype',
                   'value',
                 ],
+                defaultFields: [{
+                  "type": "header",
+                  "subtype": "h1",
+                  "label": "Title"
+                }],
+                formData: FormData
               }
               window.$(document.getElementById('fb-editor')).formBuilder(options);
               document.getElementById('fb-editor').classList.add('fb-builder-initialized');
@@ -61,34 +69,30 @@ const FormBuilder = ({ setFormData }) => {
   const getFormData = () => {
     const formData = window.$('#fb-editor').formBuilder('getData');
     setFormData(formData)
-    navigate('/templateone')
+    navigate('/selecttemplate')
   }
 
   return (
-    <div style={{
-      width: '60%',
-      margin: 'auto'
-    }}>
-      <div id="fb-editor" style={{
-        backgroundColor: '#C1D8C3',
-        padding: '10px',
-        borderRadius: '10px',
-        marginTop: '20px'
-      }}></div>
+    <div style={{ backgroundColor: '#f0ebf8', padding: '20px', }}>
       <div style={{
-        height: '100px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        width: '80%',
+        margin: 'auto',
+        padding: '5px',
+        borderRadius: '10px',
+        backgroundColor: '#fff'
+
       }}>
-        <button style={{
-          background: '#B17F59',
-          height: '40px',
-          width: '100px',
-          borderRadius: '10px',
-          color: '#fff',
-          border: 'none'
-        }} onClick={getFormData}>Save</button></div>
+        <div id="fb-editor" style={{
+        }}></div>
+        <Divider sx={{ mt: '10px' }} />
+        <div style={{
+          height: '100px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Button variant='contained' style={{ backgroundColor: '#673ab7' }} onClick={getFormData}>Preview Form</Button></div>
+      </div>
     </div>
   );
 };
