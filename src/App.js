@@ -12,6 +12,7 @@ const App = () => {
     const savedData = localStorage.getItem("formData");
     return savedData ? JSON.parse(savedData) : [];
   });
+  const [templateData, setTemplateData] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
@@ -35,7 +36,7 @@ const App = () => {
           sx={{ color: '#673ab7' }} /> ThirdEx Survey Form</h1>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<FormBuilder setFormData={setFormData} FormData={formData} />}></Route>
+          <Route path='/' element={<FormBuilder setFormData={setFormData} FormData={formData} templateData={templateData} setTemplateData={setTemplateData} />}></Route>
           <Route path='/selecttemplate' element={<SelectTemplate formData={formData} />}></Route>
           <Route path='/template/1' element={<TemplateOne formData={formData} />}></Route>
           <Route path='/template/2' element={<TemplateTwo formData={formData} />}></Route>

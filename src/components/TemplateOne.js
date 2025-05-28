@@ -14,6 +14,9 @@ const TemplateOne = ({ formData }) => {
         onSubmit: async (values) => {
             console.log('form :-', values);
             formik.resetForm();
+            alert('Form Save Successfully')
+            localStorage.removeItem('formData')
+            navigate('/')
             window.location.reload()
         }
     })

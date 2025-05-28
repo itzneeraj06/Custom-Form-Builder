@@ -12,7 +12,11 @@ const TemplateTwo = ({ formData }) => {
         initialValues,
         onSubmit: async (values) => {
             console.log('form :-', values);
-            formik?.resetForm();
+            formik.resetForm();
+            alert('Form Save Successfully')
+            localStorage.removeItem('formData')
+            navigate('/')
+            window.location.reload()
         }
     });
 
